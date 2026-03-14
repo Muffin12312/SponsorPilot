@@ -1,63 +1,78 @@
-import Image from "next/image";
+import Sidebar from "@/components/Sidebar";
 
-export default function Home() {
+const stats = [
+  { label: "Total Sponsored Workers", value: "12" },
+  { label: "Visa Expiring in 90 Days", value: "3" },
+  { label: "Missing Documents", value: "7" },
+  { label: "High-Risk Cases", value: "2" },
+];
+
+const recentAlerts = [
+  "Amandeep Singh visa expires in 43 days",
+  "Maria Ivanova missing proof of address",
+  "James Carter salary review required",
+  "Priya Nair right-to-work check due next week",
+];
+
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="min-h-screen bg-gray-50 text-gray-900 flex">
+      <Sidebar />
+
+      <main className="flex-1 p-8">
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold">Dashboard</h2>
+          <p className="text-gray-600 mt-2">
+            Live view of sponsor compliance, worker risk, and upcoming actions.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-2xl bg-white p-6 shadow-sm border border-gray-200"
+            >
+              <p className="text-sm text-gray-500">{stat.label}</p>
+              <p className="mt-3 text-3xl font-bold">{stat.value}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid gap-6 mt-8 lg:grid-cols-2">
+          <section className="rounded-2xl bg-white p-6 shadow-sm border border-gray-200">
+            <h3 className="text-xl font-semibold mb-4">Recent Alerts</h3>
+            <ul className="space-y-3">
+              {recentAlerts.map((alert) => (
+                <li
+                  key={alert}
+                  className="rounded-lg border border-gray-200 px-4 py-3 text-sm text-gray-700"
+                >
+                  {alert}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="rounded-2xl bg-white p-6 shadow-sm border border-gray-200">
+            <h3 className="text-xl font-semibold mb-4">Audit Readiness</h3>
+            <div className="space-y-4">
+              <div>
+                <p className="text-sm text-gray-500">Overall readiness</p>
+                <p className="text-2xl font-bold text-amber-600">68%</p>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-500">Open actions</p>
+                <p className="text-2xl font-bold">9</p>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-500">Workers fully compliant</p>
+                <p className="text-2xl font-bold">8 / 12</p>
+              </div>
+            </div>
+          </section>
         </div>
       </main>
     </div>
